@@ -1,0 +1,220 @@
+﻿<div id="Desktop" data-tchmi-type="TcHmi.Controls.System.TcHmiView" data-tchmi-top="0" data-tchmi-left="0" data-tchmi-width-mode="Content" data-tchmi-min-width="100" data-tchmi-min-width-unit="%" data-tchmi-height-mode="Content" data-tchmi-min-height="100" data-tchmi-min-height-unit="%">
+  <div id="ViewDesktopBeckhoffLogo" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-src="Images/Beckhoff_Logo.svg" data-tchmi-left="20" data-tchmi-top="20" data-tchmi-width="194" data-tchmi-height="57">
+
+  </div>
+<div id="TcHmiTextblock" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="29" data-tchmi-height-unit="px" data-tchmi-left="224" data-tchmi-left-unit="px" data-tchmi-text="QR-Code Output" data-tchmi-top="20" data-tchmi-top-unit="px" data-tchmi-width="292" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-font-size="20">
+</div>
+<div id="TcHmiButton" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="50" data-tchmi-height-unit="px" data-tchmi-left="20" data-tchmi-left-unit="px" data-tchmi-text="1. Get Camera Permission" data-tchmi-top="87" data-tchmi-top-unit="px" data-tchmi-width="194" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-font-size="18">
+
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
+[
+  {
+    "event": "TcHmiButton.onPressed",
+    "actions": [
+      {
+        "objectType": "JavaScript",
+        "active": true,
+        "sourceLines": [
+          "// This method will trigger user permissions",
+          "Html5Qrcode.getCameras().then(devices => {",
+          "  /**",
+          "   * devices would be an array of objects of type:",
+          "   * { id: \"id\", label: \"label\" }",
+          "   */",
+          "  if (devices && devices.length) {",
+          "  \tTcHmi.Symbol.writeEx(\"%i%CameraDevices%/i%\", devices);",
+          "    let filteredArray = devices;",
+          "    let result = filteredArray.map(a => a[\"label\"]);",
+          "    TcHmi.Symbol.writeEx(\"%i%CameraDevicesLabels%/i%\", result);",
+          "    // .. use this to start scanning.",
+          "  }",
+          "}).catch(err => {",
+          "  // handle err",
+          "  console.log(err);",
+          "});"
+        ],
+        "injectContextObject": false,
+        "asyncWait": true,
+        "waitMode": "Synchronous"
+      }
+    ]
+  }
+]
+</script>
+</div>
+<div id="TcHmiCombobox" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiCombobox" data-tchmi-combobox-text="" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="20" data-tchmi-left-unit="px" data-tchmi-top="183" data-tchmi-top-unit="px" data-tchmi-width="327" data-tchmi-width-unit="px" data-tchmi-drop-down-category-vertical-alignment="Center" data-tchmi-drop-down-vertical-alignment="Center" data-tchmi-drop-down-font-size="18" data-tchmi-drop-down-category-font-size="18" data-tchmi-text-font-size="18" data-tchmi-src-data="%i%CameraDevicesLabels%/i%" data-tchmi-selected-index="%i%SelectedIndex|BindingMode=TwoWay%/i%">
+<script data-tchmi-target-attribute="data-tchmi-content-padding" type="application/json">
+{
+  "top": 3,
+  "right": 3,
+  "bottom": 3,
+  "left": 3
+}
+</script>
+
+
+
+
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
+[
+  {
+    "event": "TcHmiCombobox.onSelectionChanged",
+    "actions": [
+      {
+        "objectType": "JavaScript",
+        "active": true,
+        "sourceLines": [
+          "let cameraDevices = TcHmi.Symbol.read('CameraDevices', TcHmi.SymbolType.Internal);",
+          "let selectedIndex = TcHmi.Symbol.read('SelectedIndex', TcHmi.SymbolType.Internal);",
+          "let selectedId = cameraDevices[selectedIndex].id;",
+          "TcHmi.Symbol.writeEx('%s%SelectedCameraId%/s%', selectedId);"
+        ],
+        "injectContextObject": false,
+        "asyncWait": true,
+        "waitMode": "Synchronous"
+      }
+    ]
+  }
+]
+</script>
+</div>
+<div id="TcHmiTextblock_2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="20" data-tchmi-left-unit="px" data-tchmi-text="Select Camera" data-tchmi-top="147" data-tchmi-top-unit="px" data-tchmi-width="150" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-font-size="18">
+</div>
+<div id="TcHmiButton_StartScanning" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="50" data-tchmi-height-unit="px" data-tchmi-left="20" data-tchmi-left-unit="px" data-tchmi-text="2. Start Scanning Selected Camera" data-tchmi-top="219" data-tchmi-top-unit="px" data-tchmi-width="150" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-font-size="18" data-tchmi-text-horizontal-alignment="Center">
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
+[
+  {
+    "event": "TcHmiButton_StartScanning.onPressed",
+    "actions": [
+      {
+        "objectType": "JavaScript",
+        "active": false,
+        "sourceLines": [
+          "const html5QrCode = new Html5Qrcode(\"reader\");",
+          "const qrCodeSuccessCallback = (decodedText, decodedResult) => {",
+          "    /* handle success */",
+          "    TcHmi.Symbol.writeEx(\"%i%outputString%/i%\", decodedText);",
+          "    ",
+          "};",
+          "const config = { fps: 10, qrbox: { width: 250, height: 250 } };",
+          "",
+          "let cameraId = TcHmi.Symbol.read(\"SelectedCameraId\", TcHmi.SymbolType.Internal);",
+          "",
+          "html5QrCode.start({ deviceId: { exact: cameraId} }, config, qrCodeSuccessCallback);"
+        ],
+        "injectContextObject": true,
+        "asyncWait": true,
+        "waitMode": "Asynchronous"
+      }
+    ]
+  }
+]
+</script>
+</div>
+<div id="TcHmiTextblock_3" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="114" data-tchmi-height-unit="px" data-tchmi-left="224" data-tchmi-left-unit="px" data-tchmi-text="%i%outputString%/i%" data-tchmi-top="59" data-tchmi-top-unit="px" data-tchmi-width="292" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-font-size="20" data-tchmi-text-horizontal-alignment="Left" data-tchmi-text-vertical-alignment="Top">
+
+<script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
+{
+  "left": 1,
+  "right": 1,
+  "top": 1,
+  "bottom": 1,
+  "leftUnit": "px",
+  "rightUnit": "px",
+  "topUnit": "px",
+  "bottomUnit": "px"
+}
+</script>
+
+<script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
+{
+  "left": "Solid",
+  "right": "Solid",
+  "top": "Solid",
+  "bottom": "Solid"
+}
+</script>
+</div>
+<div id="TcHmiHtmlHost" data-tchmi-type="TcHmi.Controls.System.TcHmiHtmlHost" data-tchmi-height="600" data-tchmi-height-unit="px" data-tchmi-left="20" data-tchmi-left-unit="px" data-tchmi-top="286" data-tchmi-top-unit="px" data-tchmi-width="770" data-tchmi-width-unit="px">
+    <div id="reader" width="100%" height="100%"></div>
+
+<script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
+{
+  "left": 1,
+  "right": 1,
+  "top": 1,
+  "bottom": 1,
+  "leftUnit": "px",
+  "rightUnit": "px",
+  "topUnit": "px",
+  "bottomUnit": "px"
+}
+</script>
+
+<script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
+{
+  "left": "Solid",
+  "right": "Solid",
+  "top": "Solid",
+  "bottom": "Solid"
+}
+</script>
+</div>
+<div id="TcHmiButton_StopScanning" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="50" data-tchmi-height-unit="px" data-tchmi-left="596" data-tchmi-left-unit="px" data-tchmi-text="3. Stop Scanning" data-tchmi-top="219" data-tchmi-top-unit="px" data-tchmi-width="194" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-font-size="18" data-tchmi-text-horizontal-alignment="Center">
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
+[
+  {
+    "event": "TcHmiButton_StopScanning.onPressed",
+    "actions": [
+      {
+        "objectType": "JavaScript",
+        "active": false,
+        "sourceLines": [
+          "Html5Qrcode.stop().then((ignore) => {",
+          "   console.log(ignore);",
+          "  // QR Code scanning is stopped.",
+          "}).catch((err) => {",
+          "  // Stop failed, handle it.",
+          "  console.log(err);",
+          "});"
+        ],
+        "injectContextObject": true,
+        "asyncWait": true,
+        "waitMode": "Asynchronous"
+      }
+    ]
+  }
+]
+</script>
+</div>
+<div id="TcHmiButton_StartScanningBackCamera" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="50" data-tchmi-height-unit="px" data-tchmi-left="180" data-tchmi-left-unit="px" data-tchmi-text="2. Start Scanning Back Camera" data-tchmi-top="219" data-tchmi-top-unit="px" data-tchmi-width="150" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-font-size="18" data-tchmi-text-horizontal-alignment="Center">
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
+[
+  {
+    "event": "TcHmiButton_StartScanningBackCamera.onPressed",
+    "actions": [
+      {
+        "objectType": "JavaScript",
+        "active": false,
+        "sourceLines": [
+          "const html5QrCode = new Html5Qrcode(\"reader\");",
+          "const qrCodeSuccessCallback = (decodedText, decodedResult) => {",
+          "    /* handle success */",
+          "    TcHmi.Symbol.writeEx(\"%i%outputString%/i%\", decodedText);",
+          "    ",
+          "};",
+          "const config = { fps: 10, qrbox: { width: 250, height: 250 } };",
+          "",
+          "// If you want to prefer back camera",
+          "html5QrCode.start({ facingMode: \"environment\" }, config, qrCodeSuccessCallback);"
+        ],
+        "injectContextObject": true,
+        "asyncWait": true,
+        "waitMode": "Asynchronous"
+      }
+    ]
+  }
+]
+</script>
+</div>
+</div>

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32929.386
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FE7A1B72-C5B7-4D7C-BB7D-76384D4DE8E1}") = "TcHmiReadQRCode", "TcHmiReadQRCode\TcHmiReadQRCode.hmiproj", "{42ABC18F-2573-4981-9745-66C1DED0B291}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|TwinCAT HMI = Debug|TwinCAT HMI
+		Release|TwinCAT HMI = Release|TwinCAT HMI
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{42ABC18F-2573-4981-9745-66C1DED0B291}.Debug|TwinCAT HMI.ActiveCfg = Debug|TwinCAT HMI
+		{42ABC18F-2573-4981-9745-66C1DED0B291}.Debug|TwinCAT HMI.Build.0 = Debug|TwinCAT HMI
+		{42ABC18F-2573-4981-9745-66C1DED0B291}.Release|TwinCAT HMI.ActiveCfg = Release|TwinCAT HMI
+		{42ABC18F-2573-4981-9745-66C1DED0B291}.Release|TwinCAT HMI.Build.0 = Release|TwinCAT HMI
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {53A940DA-7F6A-4B53-8787-A8A9C0A7FE59}
+	EndGlobalSection
+EndGlobal
