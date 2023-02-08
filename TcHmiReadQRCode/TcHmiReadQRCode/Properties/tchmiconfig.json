@@ -1,7 +1,7 @@
 ﻿{
   "$schema": "./../../Packages/Beckhoff.TwinCAT.HMI.Framework.12.758.8/runtimes/native1.12-tchmi/Schema/TchmiConfig.Schema.json",
   "basePath": "./framework",
-  "scaleMode": "None",
+  "scaleMode": "ScaleToFill",
   "startupView": "Desktop.view",
   "loginPage": "",
   "tcHmiServer": {

@@ -88,7 +88,7 @@
     "actions": [
       {
         "objectType": "JavaScript",
-        "active": false,
+        "active": true,
         "sourceLines": [
           "const html5QrCode = new Html5Qrcode(\"reader\");",
           "const qrCodeSuccessCallback = (decodedText, decodedResult) => {",
@@ -168,7 +168,7 @@
     "actions": [
       {
         "objectType": "JavaScript",
-        "active": false,
+        "active": true,
         "sourceLines": [
           "Html5Qrcode.stop().then((ignore) => {",
           "   console.log(ignore);",
@@ -195,7 +195,7 @@
     "actions": [
       {
         "objectType": "JavaScript",
-        "active": false,
+        "active": true,
         "sourceLines": [
           "const html5QrCode = new Html5Qrcode(\"reader\");",
           "const qrCodeSuccessCallback = (decodedText, decodedResult) => {",
