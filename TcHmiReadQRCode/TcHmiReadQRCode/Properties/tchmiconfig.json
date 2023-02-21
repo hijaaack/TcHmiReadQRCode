@@ -58,6 +58,21 @@
       "name": "JS/qrcode_reader.js",
       "description": "",
       "type": "JavaScript"
+    },
+    {
+      "name": "JS/qr-scanner/qr-scanner-worker.min.js",
+      "description": "",
+      "type": "JavaScript"
+    },
+    {
+      "name": "JS/qr-scanner/qr-scanner.umd.min.js",
+      "description": "",
+      "type": "JavaScript"
+    },
+    {
+      "name": "JS/qr-scanner/ScanQRCode.js",
+      "description": "",
+      "type": "JavaScript"
     }
   ],
   "userControls": [],
@@ -70,7 +85,11 @@
       "preloadBindings": false
     }
   ],
-  "userFunctions": [],
+  "userFunctions": [
+    {
+      "url": "JS/qr-scanner/ScanQRCode.js"
+    }
+  ],
   "symbols": {
     "internal": {
       "CameraDevices": {
@@ -111,8 +130,8 @@
   "disableLoadingOptimization": false,
   "creatorSettings": {
     "viewport": {
-      "defaultWidth": 800,
-      "defaultHeight": 600
+      "defaultWidth": 1920,
+      "defaultHeight": 1080
     }
   },
   "binding": {

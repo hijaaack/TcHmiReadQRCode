@@ -115,6 +115,7 @@
     <Folder Include="Imports" />
     <Folder Include="Imports\Images" />
     <Folder Include="Imports\Videos" />
+    <Folder Include="JS\qr-scanner" />
     <Folder Include="KeyboardLayouts\" />
     <Folder Include="Localization" />
     <Folder Include="JS" />
@@ -130,6 +131,19 @@
       <Visible>false</Visible>
     </Content>
     <Content Include="JS\html5-qrcode.min.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="JS\qr-scanner\qr-scanner-worker.min.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="JS\qr-scanner\qr-scanner.umd.min.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="JS\qr-scanner\ScanQRCode.function.json">
+      <SubType>Content</SubType>
+      <DependentUpon>JS\qr-scanner\ScanQRCode.js</DependentUpon>
+    </Content>
+    <Content Include="JS\qr-scanner\ScanQRCode.js">
       <SubType>Content</SubType>
     </Content>
     <Content Include="JS\qrcode_reader.js">
