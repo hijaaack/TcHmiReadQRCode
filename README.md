@@ -22,4 +22,8 @@ This sample works also on your smartphone.
 
 To get Camera Permission you need to be on localhost or HTTPS if you are connecting to the HMI remotely. 
 
-Sources used: [html5-qrcode](https://github.com/mebjas/html5-qrcode)
+Sources used: 
+
+Sample1: [html5-qrcode](https://github.com/mebjas/html5-qrcode)
+
+Sample2: [qr-scanner](https://github.com/nimiq/qr-scanner)
